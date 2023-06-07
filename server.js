@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', require('./controllers/auth'));
 
-app.get('/rings', async (req, res) => {
+app.get('/rings', isLoggedIn, async (req, res) => {
   try {
     const rings = await db.Ring.findAll();
     res.render("rings", { rings });
@@ -66,7 +66,7 @@ app.get('/rings', async (req, res) => {
   }
 });
 
-app.get('/bands', async (req, res) => {
+app.get('/bands', isLoggedIn, async (req, res) => {
   try {
     const bands = await db.Band.findAll();
     res.render("bands", { bands });
@@ -75,7 +75,7 @@ app.get('/bands', async (req, res) => {
   }
 });
 
-app.get('/gems', async (req, res) => {
+app.get('/gems', isLoggedIn, async (req, res) => {
   try {
     const gems = await db.Gem.findAll();
     res.render("gems", { gems });
