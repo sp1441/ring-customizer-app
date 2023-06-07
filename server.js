@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
+const db = require('./models');
 
 // environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
@@ -55,6 +56,42 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', require('./controllers/auth'));
+
+app.get('/rings', async (req, res) => {
+  try {
+    const rings = await db.Ring.findAll();
+    res.render("rings", { rings });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+app.get('/bands', async (req, res) => {
+  try {
+    const bands = await db.bands.findAll();
+    res.json(bands);
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+app.get('/gems', async (req, res) => {
+  try {
+    const gems = await db.gems.findAll();
+    res.json(gems);
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+app.get('/userRings', async (req, res) => {
+  try {
+    const userRings = await db.userRings.findAll();
+    res.json(userRings);
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
 
 // Add this below(?) /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
