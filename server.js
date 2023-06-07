@@ -57,9 +57,20 @@ app.get('/', (req, res) => {
 
 app.use('/auth', require('./controllers/auth'));
 
+//get routes
+
 app.get('/rings', isLoggedIn, async (req, res) => {
   try {
     const rings = await db.Ring.findAll();
+    res.render("rings", { rings });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+app.get('/rings/:name', async (req, res) => {
+  try {
+    const rings = await db.Ring.findAll({ where: { name: req.params.name } });
     res.render("rings", { rings });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
@@ -75,10 +86,38 @@ app.get('/bands', isLoggedIn, async (req, res) => {
   }
 });
 
+app.get('/bands/:name', async (req, res) => {
+  try {
+    const bands = await db.Band.findAll({ where: { name: req.params.name } });
+    res.render("bands", { bands });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
 app.get('/gems', isLoggedIn, async (req, res) => {
   try {
     const gems = await db.Gem.findAll();
     res.render("gems", { gems });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+app.get('/gems/:name', async (req, res) => {
+  try {
+    const gems = await db.Gem.findAll({ where: { name: req.params.name } });
+    res.render("gems", { gems });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+//search for a user by name
+app.get('/users/:name', async (req, res) => {
+  try {
+    const users = await db.User.findAll({ where: { name: req.params.name } });
+    res.render("users", { users });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
