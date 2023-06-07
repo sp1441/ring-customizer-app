@@ -68,8 +68,8 @@ app.get('/rings', async (req, res) => {
 
 app.get('/bands', async (req, res) => {
   try {
-    const bands = await db.bands.findAll();
-    res.json(bands);
+    const bands = await db.Band.findAll();
+    res.render("bands", { bands });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
@@ -77,21 +77,13 @@ app.get('/bands', async (req, res) => {
 
 app.get('/gems', async (req, res) => {
   try {
-    const gems = await db.gems.findAll();
-    res.json(gems);
+    const gems = await db.Gem.findAll();
+    res.render("gems", { gems });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
 });
 
-app.get('/userRings', async (req, res) => {
-  try {
-    const userRings = await db.userRings.findAll();
-    res.json(userRings);
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
 
 // Add this below(?) /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
