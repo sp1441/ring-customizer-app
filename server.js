@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', require('./controllers/auth'));
 
-//get routes
+//GET ROUTES
 
 app.get('/rings', isLoggedIn, async (req, res) => {
   try {
@@ -68,7 +68,7 @@ app.get('/rings', isLoggedIn, async (req, res) => {
   }
 });
 
-app.get('/rings/:name', async (req, res) => {
+app.get('/rings/:name', isLoggedIn, async (req, res) => {
   try {
     const rings = await db.Ring.findAll({ where: { name: req.params.name } });
     res.render("rings", { rings });
@@ -86,7 +86,7 @@ app.get('/bands', isLoggedIn, async (req, res) => {
   }
 });
 
-app.get('/bands/:name', async (req, res) => {
+app.get('/bands/:name', isLoggedIn, async (req, res) => {
   try {
     const bands = await db.Band.findAll({ where: { name: req.params.name } });
     res.render("bands", { bands });
@@ -104,7 +104,7 @@ app.get('/gems', isLoggedIn, async (req, res) => {
   }
 });
 
-app.get('/gems/:name', async (req, res) => {
+app.get('/gems/:name', isLoggedIn, async (req, res) => {
   try {
     const gems = await db.Gem.findAll({ where: { name: req.params.name } });
     res.render("gems", { gems });
@@ -114,7 +114,7 @@ app.get('/gems/:name', async (req, res) => {
 });
 
 //search for a user by name
-app.get('/users/:name', async (req, res) => {
+app.get('/users/:name', isLoggedIn, async (req, res) => {
   try {
     const users = await db.User.findAll({ where: { name: req.params.name } });
     res.render("users", { users });
@@ -123,8 +123,53 @@ app.get('/users/:name', async (req, res) => {
   }
 });
 
+// Display form for creating a new custom ring
+app.get('/userrings/new', isLoggedIn, async (req, res) => {
+  // render the form, maybe passing in any data needed to fill out the form?
+  res.render('userrings/new');
+});
 
-// Add this below(?) /auth controllers
+// handling form submission for creating a new custom ring
+app.post('/userrings', isLoggedIn, async (req, res) => {
+  // extract relevant data from req.body
+  // Use to create a new custom ring in the database
+  //  redirect the user to their list of custom rings
+  res.redirect('/userrings');
+});
+
+// displaying the user's existing custom rings
+app.get('/userrings', isLoggedIn, async (req, res) => {
+  const userRings = await db.UserRing.findAll({
+    where: { userId: req.user.id }
+  });
+  res.render('userrings/index', { userRings });
+});
+
+// Display form for editing an existing custom ring
+app.get('/userrings/:id/edit', isLoggedIn, async (req, res) => {
+  const userRing = await db.UserRing.findByPk(req.params.id);
+  // render the form, passing in existing custom ring data
+  res.render('userrings/edit', { userRing });
+});
+
+// hndling form submission for updating an existing custom ring
+app.put('/userrings/:id', isLoggedIn, async (req, res) => {
+  // extract rel. data from req.body
+  // use it to update the custom ring in the database
+  //  redirect the user to their list of custom rings
+  res.redirect('/userrings');
+});
+
+// Handle request to delete a custom ring
+app.delete('/userrings/:id', isLoggedIn, async (req, res) => {
+  // delete  custom ring from the database
+  //  redirect the user to their list of custom rings
+  res.redirect('/userrings');
+});
+
+
+
+// Add this below /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get();
   res.render('profile', { id, name, email });
