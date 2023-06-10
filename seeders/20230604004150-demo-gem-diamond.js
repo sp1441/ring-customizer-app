@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Gems', [{
+    await queryInterface.bulkInsert('gemDiamonds', [{
       name: 'Round Brilliant Cut',
       image: 'https://images.unsplash.com/photo-1514285490982-4130e9aefedb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
       createdAt: new Date(),

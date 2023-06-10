@@ -3,17 +3,17 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Gem extends Model {
+  class gemDiamond extends Model {
     static associate(models) {
-      Gem.hasMany(models.UserRing);
+      gemDiamond.hasMany(models.UserRing);
     }
   }
-  Gem.init({
+  gemDiamond.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING // URL link to my image of gem here
   }, {
     sequelize,
-    modelName: 'Gem',
+    modelName: 'gemDiamond',
   });
-  return Gem;
+  return gemDiamond;
 };
