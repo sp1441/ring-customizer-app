@@ -59,24 +59,27 @@ app.use('/auth', require('./controllers/auth'));
 
 //GET ROUTES
 
-app.get('/rings', isLoggedIn, async (req, res) => {
+//get all rings
+app.get('/settings', isLoggedIn, async (req, res) => {
   try {
-    const rings = await db.Ring.findAll();
-    res.render("rings", { rings });
+    const settings = await db.Setting.findAll();
+    res.render("settings", { settings });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
 });
 
-app.get('/rings/:name', isLoggedIn, async (req, res) => {
+// get rings by name
+app.get('/settings/:name', isLoggedIn, async (req, res) => {
   try {
-    const rings = await db.Ring.findAll({ where: { name: req.params.name } });
-    res.render("rings", { rings });
+    const settings = await db.Setting.findAll({ where: { name: req.params.name } });
+    res.render("settings", { settings });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
 });
 
+//get all bands
 app.get('/bands', isLoggedIn, async (req, res) => {
   try {
     const bands = await db.Band.findAll();
@@ -86,6 +89,7 @@ app.get('/bands', isLoggedIn, async (req, res) => {
   }
 });
 
+// get bands by name
 app.get('/bands/:name', isLoggedIn, async (req, res) => {
   try {
     const bands = await db.Band.findAll({ where: { name: req.params.name } });
@@ -95,6 +99,7 @@ app.get('/bands/:name', isLoggedIn, async (req, res) => {
   }
 });
 
+// get all gems
 app.get('/gems', isLoggedIn, async (req, res) => {
   try {
     const gems = await db.Gem.findAll();
@@ -104,6 +109,7 @@ app.get('/gems', isLoggedIn, async (req, res) => {
   }
 });
 
+// get gems by name
 app.get('/gems/:name', isLoggedIn, async (req, res) => {
   try {
     const gems = await db.Gem.findAll({ where: { name: req.params.name } });

@@ -5,7 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Gem extends Model {
     static associate(models) {
-      Gem.belongsTo(models.Ring);
       Gem.hasMany(models.UserRing);
     }
   }
