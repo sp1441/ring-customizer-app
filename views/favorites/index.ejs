@@ -1,0 +1,21 @@
+<h1>My Favorites</h1>
+<% if (favorites.length> 0) { %>
+  <div class="card-deck">
+    <% favorites.forEach((favorite)=> { %>
+      <div class="card">
+        <img src="<%= favorite.gem.image %>" class="card-img-top" alt="<%= favorite.gem.name %>">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= favorite.gem.name %>
+          </h5>
+          <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary">Edit</a>
+          <form action="/favorites/delete/<%= favorite.id %>" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+  <% } else { %>
+    <p>No favorites found.</p>
+    <% } %>

@@ -7,6 +7,9 @@ const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const db = require('./models');
+const favoritesController = require('./controllers/favoritesController');
+app.use('/favorites', favoritesController);
+
 
 // environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
@@ -59,9 +62,6 @@ app.use('/auth', require('./controllers/auth'));
 
 //GET ROUTES
 
-//get all userRings
-
-
 
 // get all diamonds
 app.get('/diamonds', isLoggedIn, async (req, res) => {
@@ -93,7 +93,7 @@ app.get('/morganites', isLoggedIn, async (req, res) => {
   }
 });
 
-// get all rubys
+// get all rubies
 app.get('/rubys', isLoggedIn, async (req, res) => {
   try {
     const rubys = await db.gemRuby.findAll();
