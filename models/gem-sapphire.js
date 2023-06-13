@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class gemSapphire extends Model {
     static associate(models) {
-      gemSapphire.hasMany(models.UserRing);
+
     }
   }
   gemSapphire.init({

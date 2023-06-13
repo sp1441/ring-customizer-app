@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class gemDiamond extends Model {
     static associate(models) {
-      gemDiamond.hasMany(models.UserRing);
+
     }
   }
   gemDiamond.init({

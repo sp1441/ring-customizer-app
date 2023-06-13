@@ -59,25 +59,9 @@ app.use('/auth', require('./controllers/auth'));
 
 //GET ROUTES
 
-//get all rings
-app.get('/settings', isLoggedIn, async (req, res) => {
-  try {
-    const settings = await db.Setting.findAll();
-    res.render("settings", { settings });
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
+//get all userRings
 
-// get rings by name
-app.get('/settings/:name', isLoggedIn, async (req, res) => {
-  try {
-    const settings = await db.Setting.findAll({ where: { name: req.params.name } });
-    res.render("settings", { settings });
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
+
 
 //get all bands
 app.get('/bands', isLoggedIn, async (req, res) => {
@@ -99,25 +83,37 @@ app.get('/bands/:name', isLoggedIn, async (req, res) => {
   }
 });
 
-// get all gems
-app.get('/gems', isLoggedIn, async (req, res) => {
+
+// get all diamonds
+app.get('/gemDiamonds', isLoggedIn, async (req, res) => {
   try {
-    const gems = await db.Gem.findAll();
-    res.render("gems", { gems });
+    const gemDiamonds = await db.gemDiamond.findAll();
+    res.render("gemDiamonds", { gemDiamonds });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }
 });
 
+
+// get all gems
+// app.get('/gems', isLoggedIn, async (req, res) => {
+//   try {
+//     const gems = await db.Gem.findAll();
+//     res.render("gems", { gems });
+//   } catch (error) {
+//     res.json({ message: "Data not found, please try again later" });
+//   }
+// });
+
 // get gems by name
-app.get('/gems/:name', isLoggedIn, async (req, res) => {
-  try {
-    const gems = await db.Gem.findAll({ where: { name: req.params.name } });
-    res.render("gems", { gems });
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
+// app.get('/gems/:name', isLoggedIn, async (req, res) => {
+//   try {
+//     const gems = await db.Gem.findAll({ where: { name: req.params.name } });
+//     res.render("gems", { gems });
+//   } catch (error) {
+//     res.json({ message: "Data not found, please try again later" });
+//   }
+// });
 
 //search for a user by name
 app.get('/users/:name', isLoggedIn, async (req, res) => {
@@ -128,52 +124,6 @@ app.get('/users/:name', isLoggedIn, async (req, res) => {
     res.json({ message: "Data not found, please try again later" });
   }
 });
-
-// Display form for creating a new custom ring
-app.get('/userrings/new', isLoggedIn, async (req, res) => {
-  // render the form, maybe passing in any data needed to fill out the form?
-  res.render('userrings/new');
-});
-
-// handling form submission for creating a new custom ring
-app.post('/userrings', isLoggedIn, async (req, res) => {
-  // extract relevant data from req.body
-  // Use to create a new custom ring in the database
-  //  redirect the user to their list of custom rings
-  res.redirect('/userrings');
-});
-
-// displaying the user's existing custom rings
-app.get('/userrings', isLoggedIn, async (req, res) => {
-  const userRings = await db.UserRing.findAll({
-    where: { userId: req.user.id }
-  });
-  res.render('userrings/index', { userRings });
-});
-
-// Display form for editing an existing custom ring
-app.get('/userrings/:id/edit', isLoggedIn, async (req, res) => {
-  const userRing = await db.UserRing.findByPk(req.params.id);
-  // render the form, passing in existing custom ring data
-  res.render('userrings/edit', { userRing });
-});
-
-// hndling form submission for updating an existing custom ring
-app.put('/userrings/:id', isLoggedIn, async (req, res) => {
-  // extract rel. data from req.body
-  // use it to update the custom ring in the database
-  //  redirect the user to their list of custom rings
-  res.redirect('/userrings');
-});
-
-// Handle request to delete a custom ring
-app.delete('/userrings/:id', isLoggedIn, async (req, res) => {
-  // delete  custom ring from the database
-  //  redirect the user to their list of custom rings
-  res.redirect('/userrings');
-});
-
-
 
 // Add this below /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {

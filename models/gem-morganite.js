@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class gemMorganite extends Model {
     static associate(models) {
-      gemMorganite.hasMany(models.UserRing);
+
     }
   }
   gemMorganite.init({

@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class gemEmerald extends Model {
     static associate(models) {
-      gemEmerald.hasMany(models.UserRing);
+
     }
   }
   gemEmerald.init({

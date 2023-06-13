@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class gemRuby extends Model {
     static associate(models) {
-      gemRuby.hasMany(models.UserRing);
+
     }
   }
   gemRuby.init({
