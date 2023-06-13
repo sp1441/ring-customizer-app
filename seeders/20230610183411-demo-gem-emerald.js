@@ -4,47 +4,47 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('gemEmeralds', [{
       name: 'Round Brilliant Cut',
-      image: 'https://imgur.com/a/X7urAVf',
+      image: 'https://i.imgur.com/Uyb2j2L.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Princess Cut',
-      image: 'https://imgur.com/a/FQhFOW6',
+      image: 'https://i.imgur.com/ZMwdReM.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Emerald Cut',
-      image: 'https://images.unsplash.com/photo-1600119612651-0db31b3a7baa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      image: 'https://i.imgur.com/BsGkMKm.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Cushion Cut',
-      image: 'https://imgur.com/a/8kZ1N3K',
+      image: 'https://i.imgur.com/yuIwBF9.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Oval Cut',
-      image: 'https://imgur.com/a/OSr8fQH',
+      image: 'https://i.imgur.com/MHC3FK5.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Asscher Cut',
-      image: 'https://imgur.com/a/aul4fVc',
+      image: 'https://i.imgur.com/m24BjW6.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Pear Cut',
-      image: 'https://imgur.com/a/r0tMJ5Z',
+      image: 'https://i.imgur.com/RSxhtqi.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Heart Cut',
-      image: 'https://imgur.com/a/j6iFs56',
+      image: 'https://i.imgur.com/LO6w1z6.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Marquise Cut',
-      image: 'https://images.unsplash.com/photo-1618763604327-86ab15cd7b71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      image: 'https://i.imgur.com/F4oHfGB.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

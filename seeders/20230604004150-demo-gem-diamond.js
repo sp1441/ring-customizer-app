@@ -44,7 +44,7 @@ module.exports = {
       updatedAt: new Date()
     }, {
       name: 'Heart Cut',
-      image: 'https://i.imgur.com/DbTPkN2.png',
+      image: 'https://i.imgur.com/0jXl05P.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {

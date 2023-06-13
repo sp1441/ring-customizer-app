@@ -1,0 +1,13 @@
+<% for (let i=0; i < rubys.length; i++) { %>
+  <% let ruby=rubys[i] %>
+    <div>
+      <h2>
+        <%= ruby.name %>
+      </h2>
+      <img src="<%= ruby.image %>" alt="<%= ruby.name %>">
+      <form action="/favorites" method="POST">
+        <input type="hidden" name="gemId" value="<%= ruby.id %>">
+        <button type="submit">Add to Favorites</button>
+      </form>
+    </div>
+    <% } %>

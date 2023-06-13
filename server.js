@@ -63,32 +63,53 @@ app.use('/auth', require('./controllers/auth'));
 
 
 
-//get all bands
-app.get('/bands', isLoggedIn, async (req, res) => {
-  try {
-    const bands = await db.Band.findAll();
-    res.render("bands", { bands });
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
-
-// get bands by name
-app.get('/bands/:name', isLoggedIn, async (req, res) => {
-  try {
-    const bands = await db.Band.findAll({ where: { name: req.params.name } });
-    res.render("bands", { bands });
-  } catch (error) {
-    res.json({ message: "Data not found, please try again later" });
-  }
-});
-
-
 // get all diamonds
 app.get('/diamonds', isLoggedIn, async (req, res) => {
   try {
     const diamonds = await db.gemDiamond.findAll();
     res.render("diamonds", { diamonds });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+// get all emeralds
+app.get('/emeralds', isLoggedIn, async (req, res) => {
+  try {
+    const emeralds = await db.gemEmerald.findAll();
+    res.render("emeralds", { emeralds });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+// get all morganites
+app.get('/morganites', isLoggedIn, async (req, res) => {
+  try {
+    const morganites = await db.gemMorganite.findAll();
+    res.render("morganites", { morganites });
+  } catch (error) {
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+// get all rubys
+app.get('/rubys', isLoggedIn, async (req, res) => {
+  try {
+    const rubys = await db.gemRuby.findAll();
+    res.render("rubys", { rubys });
+  } catch (error) {
+    console.error(error);
+    res.json({ message: "Data not found, please try again later" });
+  }
+});
+
+
+// get all sapphires
+app.get('/sapphires', isLoggedIn, async (req, res) => {
+  try {
+    const sapphires = await db.gemSapphire.findAll();
+    res.render("sapphires", { sapphires });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }

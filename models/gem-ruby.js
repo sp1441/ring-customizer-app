@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'gemRuby',
+    tableName: 'gemRubys',
   });
   return gemRuby;
 };
