@@ -85,10 +85,10 @@ app.get('/bands/:name', isLoggedIn, async (req, res) => {
 
 
 // get all diamonds
-app.get('/gemDiamonds', isLoggedIn, async (req, res) => {
+app.get('/diamonds', isLoggedIn, async (req, res) => {
   try {
-    const gemDiamonds = await db.gemDiamond.findAll();
-    res.render("gemDiamonds", { gemDiamonds });
+    const diamonds = await db.gemDiamond.findAll();
+    res.render("diamonds", { diamonds });
   } catch (error) {
     res.json({ message: "Data not found, please try again later" });
   }

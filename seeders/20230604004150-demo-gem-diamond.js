@@ -4,52 +4,52 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('gemDiamonds', [{
       name: 'Round Brilliant Cut',
-      image: 'https://imgur.com/a/YOxyRkh',
+      image: 'https://i.imgur.com/Z614wnK.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Princess Cut',
-      image: 'https://imgur.com/a/UONIHi4',
+      image: 'https://i.imgur.com/7vkVytI.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Emerald Cut',
-      image: 'https://imgur.com/a/8DZJEgb',
+      image: 'https://i.imgur.com/PrCwIdP.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Cushion Cut',
-      image: 'https://imgur.com/a/oRwjJjt',
+      image: 'https://i.imgur.com/tIWNEJd.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Oval Cut',
-      image: 'https://imgur.com/a/MHDWzDA',
+      image: 'https://i.imgur.com/9M6yTrQ.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Radiant Cut',
-      image: 'https://imgur.com/a/su3WyXz',
+      image: 'https://i.imgur.com/ePi2LCF.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Asscher Cut',
-      image: 'https://imgur.com/a/5Emp4bY',
+      image: 'https://i.imgur.com/OapHs5D.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Pear Cut',
-      image: 'https://imgur.com/a/y1TkcFj',
+      image: 'https://i.imgur.com/vFy52zd.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Heart Cut',
-      image: 'https://imgur.com/a/CT9npE4',
+      image: 'https://i.imgur.com/DbTPkN2.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       name: 'Marquise Cut',
-      image: 'https://imgur.com/a/PeRkfJ8',
+      image: 'https://i.imgur.com/6kcnwH4.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
