@@ -1,7 +1,13 @@
-<% for( let i=0; i < diamonds.length; i++ ) { %>
+<% for (let i=0; i < diamonds.length; i++) { %>
   <% let diamond=diamonds[i] %>
-    <img src="<%= diamond.image%>" alt="">
-    <p>
-      <%= diamond.name %>
-    </p>
+    <div>
+      <h2>
+        <%= diamond.name %>
+      </h2>
+      <img src="<%= diamond.image %>" alt="<%= diamond.name %>">
+      <form action="/favorites" method="POST">
+        <input type="hidden" name="gemId" value="<%= diamond.id %>">
+        <button type="submit">Add to Favorites</button>
+      </form>
+    </div>
     <% } %>
