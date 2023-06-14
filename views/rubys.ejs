@@ -1,19 +1,25 @@
-<% for (let i=0; i < rubys.length; i++) { %>
-  <% let ruby=rubys[i] %>
-    <div>
-      <h2>
-        <%= ruby.name %>
-      </h2>
-      <img src="<%= ruby.image %>" alt="<%= ruby.name %>">
-      <% if (locals.errorMessage) { %>
-        <div class="error-message">
-          <%= locals.errorMessage %>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <% for (let i=0; i < rubys.length; i++) { %>
+    <% let ruby=rubys[i] %>
+      <div class="col">
+        <div class="card shadow-sm gem-card">
+          <img src="<%= ruby.image %>" alt="<%= ruby.name %>" class="bd-placeholder-img card-img-top">
+          <div class="card-body">
+            <h2 class="gem-name">
+              <%= ruby.name %>
+            </h2>
+            <% if (locals.errorMessage) { %>
+              <div class="error-message">
+                <%= locals.errorMessage %>
+              </div>
+              <% } %>
+                <form action="/favorites" method="POST">
+                  <input type="hidden" name="gemId" value="<%= ruby.id %>">
+                  <input type="hidden" name="gemType" value="ruby">
+                  <button type="submit" class="btn btn-primary gem-button">Add to Favorites</button>
+                </form>
+          </div>
         </div>
-        <% } %>
-          <form action="/favorites" method="POST">
-            <input type="hidden" name="gemId" value="<%= ruby.id %>">
-            <input type="hidden" name="gemType" value="ruby">
-            <button type="submit">Add to Favorites</button>
-          </form>
-    </div>
-    <% } %>
+      </div>
+      <% } %>
+</div>
