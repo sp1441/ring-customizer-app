@@ -5,9 +5,15 @@
         <%= ruby.name %>
       </h2>
       <img src="<%= ruby.image %>" alt="<%= ruby.name %>">
-      <form action="/favorites" method="POST">
-        <input type="hidden" name="gemId" value="<%= ruby.id %>">
-        <button type="submit">Add to Favorites</button>
-      </form>
+      <% if (locals.errorMessage) { %>
+        <div class="error-message">
+          <%= locals.errorMessage %>
+        </div>
+        <% } %>
+          <form action="/favorites" method="POST">
+            <input type="hidden" name="gemId" value="<%= ruby.id %>">
+            <input type="hidden" name="gemType" value="ruby">
+            <button type="submit">Add to Favorites</button>
+          </form>
     </div>
     <% } %>

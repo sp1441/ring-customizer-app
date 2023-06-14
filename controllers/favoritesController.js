@@ -83,4 +83,40 @@ router.post('/delete/:id', isLoggedIn, async (req, res) => {
   }
 });
 
+router.post('/', isLoggedIn, async (req, res) => {
+  const { gemId, gemType } = req.body;
+
+  let gemForeignKey = {};
+  switch (gemType) {
+    case 'diamond':
+      gemForeignKey.diamondId = gemId;
+      break;
+    case 'emerald':
+      gemForeignKey.emeraldId = gemId;
+      break;
+    case 'ruby':
+      gemForeignKey.rubyId = gemId;
+      break;
+    case 'morganite':
+      gemForeignKey.morganiteId = gemId;
+      break;
+    case 'sapphire':
+      gemForeignKey.sapphireId = gemId;
+      break;
+  }
+
+  try {
+    await db.Favorites.create({
+      userId: req.user.id,
+      ...gemForeignKey,
+      gemType
+    });
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
+
 module.exports = router;

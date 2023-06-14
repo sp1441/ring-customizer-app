@@ -1,6 +1,8 @@
+const passport = require('passport');
+
 function isLoggedIn(req, res, next) {
-  if (!req.user) {
-    req.flash('error', 'You must be signed in to access page');
+  if (!req.isAuthenticated()) {
+    req.flash('error', 'You must be signed in to access this page');
     res.redirect('/auth/login');
   } else {
     next();
@@ -8,4 +10,3 @@ function isLoggedIn(req, res, next) {
 }
 
 module.exports = isLoggedIn;
-

@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       emeraldId: DataTypes.INTEGER,
       morganiteId: DataTypes.INTEGER,
       rubyId: DataTypes.INTEGER,
-      sapphireId: DataTypes.INTEGER
+      sapphireId: DataTypes.INTEGER,
+      gemType: DataTypes.STRING // new field
     },
     {
       sequelize,

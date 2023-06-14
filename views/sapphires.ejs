@@ -5,9 +5,15 @@
         <%= sapphire.name %>
       </h2>
       <img src="<%= sapphire.image %>" alt="<%= sapphire.name %>">
-      <form action="/favorites" method="POST">
-        <input type="hidden" name="gemId" value="<%= sapphire.id %>">
-        <button type="submit">Add to Favorites</button>
-      </form>
+      <% if (locals.errorMessage) { %>
+        <div class="error-message">
+          <%= locals.errorMessage %>
+        </div>
+        <% } %>
+          <form action="/favorites" method="POST">
+            <input type="hidden" name="gemId" value="<%= sapphire.id %>">
+            <input type="hidden" name="gemType" value="sapphire">
+            <button type="submit">Add to Favorites</button>
+          </form>
     </div>
     <% } %>

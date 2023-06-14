@@ -4,25 +4,28 @@ const LocalStrategy = require('passport-local').Strategy;
 // Database
 const { user } = require('../models');
 
-const STRATEGY = new LocalStrategy({
-  usernameField: 'email',         // looks for an email field as the username
-  passwordField: 'password'       // looks for an password field as the password
-}, async (email, password, cb) => {
-  try {
-    const foundUser = await user.findOne({
-      where: { email }
-    });
+const STRATEGY = new LocalStrategy(
+  {
+    usernameField: 'email',         // looks for an email field as the username
+    passwordField: 'password'       // looks for a password field as the password
+  },
+  async (email, password, cb) => {
+    try {
+      const foundUser = await user.findOne({
+        where: { email }
+      });
 
-    if (!foundUser || !foundUser.validPassword(password)) {
-      cb(null, false);     // if no user or invalid password, return false
-    } else {
-      cb(null, foundUser);
+      if (!foundUser || !foundUser.validPassword(password)) {
+        cb(null, false);     // if no user or invalid password, return false
+      } else {
+        cb(null, foundUser);
+      }
+    } catch (err) {
+      console.log('------- Error below -----------');
+      console.log(err);
     }
-  } catch (err) {
-    console.log('------- Error below -----------');
-    console.log(err);
   }
-});
+);
 
 // Passport "serialize" info to be able to login
 passport.serializeUser((user, cb) => {
@@ -43,11 +46,9 @@ passport.deserializeUser(async (id, cb) => {
   }
 });
 
-// Use new instance of LocalStrategy inside of Passport as middleward
 passport.use(STRATEGY);
 
-// Export passport from ppConfig.js
-module.exports = passport;
-
-
-
+module.exports = (app) => {
+  app.use(passport.initialize());
+  app.use(passport.session());
+};

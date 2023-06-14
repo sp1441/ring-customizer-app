@@ -5,9 +5,15 @@
         <%= diamond.name %>
       </h2>
       <img src="<%= diamond.image %>" alt="<%= diamond.name %>">
-      <form action="/favorites" method="POST">
-        <input type="hidden" name="gemId" value="<%= diamond.id %>">
-        <button type="submit">Add to Favorites</button>
-      </form>
+      <% if (locals.errorMessage) { %>
+        <div class="error-message">
+          <%= locals.errorMessage %>
+        </div>
+        <% } %>
+          <form action="/favorites" method="POST">
+            <input type="hidden" name="gemId" value="<%= diamond.id %>">
+            <input type="hidden" name="gemType" value="diamond">
+            <button type="submit">Add to Favorites</button>
+          </form>
     </div>
     <% } %>
