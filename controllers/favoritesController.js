@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn');
 const db = require('../models');
+const getFavorite = async (id, userId) => {
+  return db.Favorites.findOne({
+    where: { id, userId },
+  });
+};
 
 // render favorites folder
 router.get('/', isLoggedIn, async (req, res) => {
@@ -175,7 +180,7 @@ router.get('/edit-comment/:id', isLoggedIn, async (req, res) => {
 // Put route for updating the comment
 router.put('/edit-comment/:id', async (req, res) => {
   try {
-    const favorite = await Favorites.findOne({
+    const favorite = await db.Favorites.findOne({
       where: { id: req.params.id, userId: req.user.id },
     });
     if (!favorite) return res.status(404).render('404');
@@ -191,7 +196,7 @@ router.put('/edit-comment/:id', async (req, res) => {
 // Put route for adding a comment
 router.put('/add-comment/:id', async (req, res) => {
   try {
-    const favorite = await Favorites.findOne({
+    const favorite = await db.Favorites.findOne({
       where: { id: req.params.id, userId: req.user.id },
     });
     if (!favorite) return res.status(404).render('404');
