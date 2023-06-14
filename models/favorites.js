@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       Favorites.belongsTo(models.gemMorganite, { foreignKey: 'morganiteId', as: 'morganite' });
       Favorites.belongsTo(models.gemRuby, { foreignKey: 'rubyId', as: 'ruby' });
       Favorites.belongsTo(models.gemSapphire, { foreignKey: 'sapphireId', as: 'sapphire' });
+      Favorites.hasMany(models.Comment, { foreignKey: 'favoriteId' });
+
     }
   }
 
