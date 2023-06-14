@@ -1,22 +1,24 @@
-<h1>My Favorites</h1>
+<h2>My Favorites</h2>
 <% if (favorites.length> 0) { %>
-  <div class="card-deck">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     <% favorites.forEach((favorite)=> { %>
-      <div class="card">
-        <img src="<%= favorite[favorite.gemType].image %>" class="card-img-top"
-          alt="<%= favorite[favorite.gemType].name %>">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= favorite[favorite.gemType].name %>
-          </h5>
-          <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary">Edit</a>
-          <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
+      <div class="col">
+        <div class="card shadow-sm gem-card">
+          <img src="<%= favorite[favorite.gemType].image %>" class="bd-placeholder-img card-img-top"
+            alt="<%= favorite[favorite.gemType].name %>">
+          <div class="card-body">
+            <h2 class="gem-name">
+              <%= favorite[favorite.gemType].name %>
+            </h2>
+            <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Edit</a>
+            <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger gem-button">Delete</button>
+            </form>
+          </div>
         </div>
       </div>
       <% }) %>
   </div>
   <% } else { %>
-    <p>No favorites found.</p>
+    <p>No favorites found. Add your favorites here!</p>
     <% } %>
