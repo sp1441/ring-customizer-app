@@ -64,8 +64,8 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 });
 
 
-// Delete a favorite
-router.post('/delete/:id', isLoggedIn, async (req, res) => {
+// Delete a favorite - reformat so it's a 
+router.delete('/delete/:id', isLoggedIn, async (req, res) => {
   try {
     const favorite = await db.Favorites.findOne({
       where: { id: req.params.id, userId: req.user.id },

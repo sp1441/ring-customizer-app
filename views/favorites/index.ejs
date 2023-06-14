@@ -10,7 +10,7 @@
             <%= favorite[favorite.gemType].name %>
           </h5>
           <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary">Edit</a>
-          <form action="/favorites/delete/<%= favorite.id %>" method="POST" class="d-inline">
+          <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </div>

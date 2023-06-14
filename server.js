@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const db = require('./models');
 const favoritesController = require('./controllers/favoritesController');
+const methodOverride = require('method-override');
 
 // environment variables
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -17,6 +18,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+app.use(methodOverride('_method'));
 
 app.use(flash());            // flash middleware
 
@@ -132,6 +134,9 @@ app.use(function (err, req, res, next) {
   });
 });
 
+app.get('/*', (req, res) => {
+  res.render('error')
+})
 const PORT = process.env.PORT || 4000;
 const server = app.listen(PORT, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${PORT} 🎧`);
