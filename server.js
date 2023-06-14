@@ -114,6 +114,24 @@ app.get('/sapphires', isLoggedIn, async (req, res) => {
   }
 });
 
+app.post('/favorites', isLoggedIn, async (req, res) => {
+  try {
+    const gemId = req.body.gemId; // extract gem ID
+
+    // Create new fav entry in  database
+    await db.Favorites.create({
+      userId: req.user.id,
+      gemId: gemId,
+    });
+
+    // redirect  user to the favorites page
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
 
 // get all gems
 // app.get('/gems', isLoggedIn, async (req, res) => {
