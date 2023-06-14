@@ -1,0 +1,8 @@
+<h2>Edit Comment</h2>
+<form action="/favorites/edit-comment/<%= favorite.id %>?_method=PUT" method="POST">
+  <div>
+    <label for="comment">Comment:</label>
+    <textarea id="comment" name="comment"><%= favorite.comment %></textarea>
+  </div>
+  <button type="submit">Submit</button>
+</form>
