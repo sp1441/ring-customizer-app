@@ -1,0 +1,17 @@
+<div class="container">
+  <form action="/profile/profile-edit" method="post">
+    <div class="form-group">
+      <label for="aboutMe">About me:</label>
+      <textarea class="form-control" id="aboutMe" name="aboutMe" rows="3"><%= user.aboutMe %></textarea>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+    </div>
+    <div class="form-group">
+      <label for="website">Website:</label>
+      <input type="url" class="form-control" id="website" name="website" value="<%= user.website %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>

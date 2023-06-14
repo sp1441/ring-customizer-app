@@ -145,8 +145,8 @@ app.get('/profile', isLoggedIn, (req, res) => {
 });
 
 // routes for editing and updating user profile
-app.get('/profile/edit', isLoggedIn, userController.edit);
-app.post('/profile/edit', isLoggedIn, userController.update);
+app.get('/profile/profile-edit', isLoggedIn, userController.edit);
+app.post('/profile/profile-edit', isLoggedIn, userController.update);
 
 
 app.use(function (err, req, res, next) {
