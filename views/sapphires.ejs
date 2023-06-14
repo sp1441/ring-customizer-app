@@ -1,19 +1,25 @@
-<% for (let i=0; i < sapphires.length; i++) { %>
-  <% let sapphire=sapphires[i] %>
-    <div>
-      <h2>
-        <%= sapphire.name %>
-      </h2>
-      <img src="<%= sapphire.image %>" alt="<%= sapphire.name %>">
-      <% if (locals.errorMessage) { %>
-        <div class="error-message">
-          <%= locals.errorMessage %>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <% for (let i=0; i < sapphires.length; i++) { %>
+    <% let sapphire=sapphires[i] %>
+      <div class="col">
+        <div class="card shadow-sm gem-card">
+          <img src="<%= sapphire.image %>" alt="<%= sapphire.name %>" class="bd-placeholder-img card-img-top">
+          <div class="card-body">
+            <h2 class="gem-name">
+              <%= sapphire.name %>
+            </h2>
+            <% if (locals.errorMessage) { %>
+              <div class="error-message">
+                <%= locals.errorMessage %>
+              </div>
+              <% } %>
+                <form action="/favorites" method="POST">
+                  <input type="hidden" name="gemId" value="<%= sapphire.id %>">
+                  <input type="hidden" name="gemType" value="sapphire">
+                  <button type="submit" class="btn btn-primary gem-button">Add to Favorites</button>
+                </form>
+          </div>
         </div>
-        <% } %>
-          <form action="/favorites" method="POST">
-            <input type="hidden" name="gemId" value="<%= sapphire.id %>">
-            <input type="hidden" name="gemType" value="sapphire">
-            <button type="submit">Add to Favorites</button>
-          </form>
-    </div>
-    <% } %>
+      </div>
+      <% } %>
+</div>

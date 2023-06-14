@@ -1,19 +1,25 @@
-<% for (let i=0; i < morganites.length; i++) { %>
-  <% let morganite=morganites[i] %>
-    <div>
-      <h2>
-        <%= morganite.name %>
-      </h2>
-      <img src="<%= morganite.image %>" alt="<%= morganite.name %>">
-      <% if (locals.errorMessage) { %>
-        <div class="error-message">
-          <%= locals.errorMessage %>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <% for (let i=0; i < morganites.length; i++) { %>
+    <% let morganite=morganites[i] %>
+      <div class="col">
+        <div class="card shadow-sm gem-card">
+          <img src="<%= morganite.image %>" alt="<%= morganite.name %>" class="bd-placeholder-img card-img-top">
+          <div class="card-body">
+            <h2 class="gem-name">
+              <%= morganite.name %>
+            </h2>
+            <% if (locals.errorMessage) { %>
+              <div class="error-message">
+                <%= locals.errorMessage %>
+              </div>
+              <% } %>
+                <form action="/favorites" method="POST">
+                  <input type="hidden" name="gemId" value="<%= morganite.id %>">
+                  <input type="hidden" name="gemType" value="morganite">
+                  <button type="submit" class="btn btn-primary gem-button">Add to Favorites</button>
+                </form>
+          </div>
         </div>
-        <% } %>
-          <form action="/favorites" method="POST">
-            <input type="hidden" name="gemId" value="<%= morganite.id %>">
-            <input type="hidden" name="gemType" value="morganite">
-            <button type="submit">Add to Favorites</button>
-          </form>
-    </div>
-    <% } %>
+      </div>
+      <% } %>
+</div>
