@@ -42,7 +42,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use(flash());            // flash middleware
 
 app.use(session({
