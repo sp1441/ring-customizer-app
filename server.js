@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 // Use the isLoggedIn middleware and other routes after Passport has been initialized
 const isLoggedIn = require('./middleware/isLoggedIn');
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
   res.render('index');
 });
 
