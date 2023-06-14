@@ -43,31 +43,19 @@
                   </p>
                 </div>
                 <% } %>
-                  <% if (user.email) { %>
+                  <% if (user.website) { %>
                     <div class="form-group">
-                      <label for="email">Email:</label>
-                      <p id="email">
-                        <%= user.email %>
-                          <form action="/profile/delete/email" method="POST" class="delete-form">
+                      <label for="website">Website:</label>
+                      <p id="website">
+                        <%= user.website %>
+                          <form action="/profile/delete/website" method="POST" class="delete-form">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger delete-btn">Delete</button>
                           </form>
                       </p>
                     </div>
                     <% } %>
-                      <% if (user.website) { %>
-                        <div class="form-group">
-                          <label for="website">Website:</label>
-                          <p id="website">
-                            <%= user.website %>
-                              <form action="/profile/delete/website" method="POST" class="delete-form">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger delete-btn">Delete</button>
-                              </form>
-                          </p>
-                        </div>
-                        <% } %>
-                          <a href="/profile/edit" class="add-info-btn">Add more information</a>
+                      <a href="/profile/edit" class="add-info-btn">Add more information</a>
             </div>
           </div>
         </div>

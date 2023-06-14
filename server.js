@@ -193,6 +193,7 @@ app.post('/profile', isLoggedIn, (req, res) => {
     })
     .catch(err => {
       console.log(err);
+      req.flash('error', 'An error occurred while updating the profile');
       res.redirect('/profile/edit');
     });
 });
@@ -206,16 +207,21 @@ app.delete('/profile/delete/:field', isLoggedIn, async (req, res) => {
       }
     });
 
-    // delete the specified field
-    user[field] = null;
-    await user.save();
-
-    res.redirect('/profile');
+    // don't delete email field if one shows up
+    if (field === 'email') {
+      res.redirect('/profile');
+    } else {
+      // delete the specified field
+      user[field] = null;
+      await user.save();
+      res.redirect('/profile');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while deleting user information");
   }
 });
+
 
 
 
