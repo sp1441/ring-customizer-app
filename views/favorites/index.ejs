@@ -5,30 +5,34 @@
       <div class="col">
         <div class="card shadow-sm gem-card">
           <img src="<%= favorite[favorite.gemType].image %>" class="bd-placeholder-img card-img-top"
-            alt="<%= favorite[favorite.gemType].name %>">
+            alt="<%= favorite.name ? favorite.name : favorite[favorite.gemType].name %>">
           <div class="card-body">
             <h2 class="gem-name">
-              <%= favorite[favorite.gemType].name %>
+              <%= favorite.name ? favorite.name : favorite[favorite.gemType].name %>
             </h2>
 
             <!-- existing comment display -->
-            <p class="gem-comment">
-              <%= favorite.comment ? favorite.comment : 'No comments' %>
-            </p>
-
             <% if (favorite.comment) { %>
-              <!-- edit comment button -->
-              <a href="/favorites/edit-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Edit Comment</a>
-              <% } else { %>
-                <!-- add comment button -->
-                <a href="/favorites/add-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Add Comment</a>
-                <% } %>
+              <p class="gem-comment">
+                <%= favorite.comment %>
+              </p>
+              <% } %>
 
-                  <!-- existing buttons -->
-                  <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Edit</a>
-                  <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-danger gem-button">Delete</button>
-                  </form>
+                <% if (favorite.comment) { %>
+                  <!-- edit comment button -->
+                  <a href="/favorites/edit-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Edit
+                    Comment</a>
+                  <% } else { %>
+                    <!-- add comment button -->
+                    <a href="/favorites/add-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Add
+                      Comment</a>
+                    <% } %>
+
+                      <!-- existing buttons -->
+                      <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Edit</a>
+                      <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger gem-button">Delete</button>
+                      </form>
           </div>
         </div>
       </div>

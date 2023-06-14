@@ -80,21 +80,27 @@ router.post('/', isLoggedIn, async (req, res) => {
   const { gemId, gemType } = req.body;
 
   let gemForeignKey = {};
+  let gemName = '';
   switch (gemType) {
     case 'diamond':
       gemForeignKey.diamondId = gemId;
+      gemName = await db.gemDiamond.findOne({ where: { id: gemId } }).name;
       break;
     case 'emerald':
       gemForeignKey.emeraldId = gemId;
+      gemName = await db.gemEmerald.findOne({ where: { id: gemId } }).name;
       break;
     case 'ruby':
       gemForeignKey.rubyId = gemId;
+      gemName = await db.gemRuby.findOne({ where: { id: gemId } }).name;
       break;
     case 'morganite':
       gemForeignKey.morganiteId = gemId;
+      gemName = await db.gemMorganite.findOne({ where: { id: gemId } }).name;
       break;
     case 'sapphire':
       gemForeignKey.sapphireId = gemId;
+      gemName = await db.gemSapphire.findOne({ where: { id: gemId } }).name;
       break;
   }
 
@@ -102,7 +108,8 @@ router.post('/', isLoggedIn, async (req, res) => {
     await db.Favorites.create({
       userId: req.user.id,
       ...gemForeignKey,
-      gemType
+      gemType,
+      name: gemName // setting the initial name to the gem's name
     });
     res.redirect('/favorites');
   } catch (error) {
@@ -122,7 +129,7 @@ router.put('/edit/:id', isLoggedIn, async (req, res) => {
       return res.status(403).send('You do not have permission to edit this favorite.');
     }
 
-    favorite.comment = req.body.comment; // Update the comment based on the form input
+    favorite.name = req.body.name; // Update the name based on the form input
     await favorite.save();
 
     res.redirect('/favorites');
@@ -131,6 +138,7 @@ router.put('/edit/:id', isLoggedIn, async (req, res) => {
     res.status(500).send('Something went wrong.');
   }
 });
+
 
 // Get route for displaying form to add comment
 router.get('/add-comment/:id', isLoggedIn, async (req, res) => {
@@ -208,5 +216,27 @@ router.put('/add-comment/:id', async (req, res) => {
     res.status(500).render('error', { error });
   }
 });
+
+// Delete a comment
+router.delete('/delete-comment/:id', isLoggedIn, async (req, res) => {
+  try {
+    const favorite = await db.Favorites.findOne({
+      where: { id: req.params.id, userId: req.user.id },
+    });
+
+    if (!favorite || !favorite.comment) {
+      return res.status(403).send('You do not have permission to delete this comment.');
+    }
+
+    favorite.comment = null; // Remove the comment
+    await favorite.save();
+
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
 
 module.exports = router;
