@@ -140,13 +140,47 @@ app.post('/favorites', isLoggedIn, async (req, res) => {
 
 // Add this below /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const { id, name, email } = req.user.get();
-  res.render('profile', { id, name, email });
+  const user = req.user.get();
+  res.render('profile', { user });
 });
 
+
 // routes for editing and updating user profile
-app.get('/profile/profile-edit', isLoggedIn, userController.edit);
-app.post('/profile/profile-edit', isLoggedIn, userController.update);
+app.get('/profile/edit', isLoggedIn, (req, res) => {
+  res.render('edit', {
+    user: req.user
+  });
+});
+
+app.post('/profile', isLoggedIn, (req, res) => {
+  // Extract information from form
+  let aboutMe = req.body.aboutMe;
+  let email = req.body.email;
+  let website = req.body.website;
+
+  // Find the user and update their information
+  user.findById(req.user.id, function (err, user) {
+    if (err) {
+      console.log(err);
+      return res.redirect('/profile');
+    }
+    if (!user) {
+      return res.redirect('/profile');
+    }
+
+    user.aboutMe = aboutMe;
+    user.email = email;
+    user.website = website;
+
+    user.save(function (err) {
+      if (err) {
+        console.log(err);
+      }
+
+      return res.redirect('/profile');
+    });
+  });
+});
 
 
 app.use(function (err, req, res, next) {

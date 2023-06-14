@@ -1,6 +1,5 @@
 <div class="container">
   <div class="main-body">
-
     <div class="row gutters-sm">
       <div class="col-md-4 mb-3">
         <div class="card">
@@ -16,30 +15,25 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="col-md-8">
         <div class="card mb-3">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Username</h6>
+            <form action="/profile" method="post">
+              <div class="form-group">
+                <label for="aboutMe">About Me:</label>
+                <textarea class="form-control" id="aboutMe" name="aboutMe" rows="3"><%= user.aboutMe %></textarea>
               </div>
-              <div class="col-sm-9 text-secondary">
-                <%= user.username %>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" readonly>
               </div>
-            </div>
-            <hr>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-12">
-                <a class="btn btn-info " href="/profile/edit">Add More Information</a>
+              <div class="form-group">
+                <label for="website">Website:</label>
+                <input type="text" class="form-control" id="website" name="website" value="<%= user.website %>">
               </div>
-            </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
       </div>
