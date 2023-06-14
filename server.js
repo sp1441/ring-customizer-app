@@ -8,6 +8,8 @@ const passport = require('passport');
 const db = require('./models');
 const favoritesController = require('./controllers/favoritesController');
 const methodOverride = require('method-override');
+const userController = require('./controllers/userController');
+
 
 // environment variables
 const SECRET_SESSION = process.env.SECRET_SESSION;
@@ -141,6 +143,11 @@ app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get();
   res.render('profile', { id, name, email });
 });
+
+// routes for editing and updating user profile
+app.get('/profile/edit', isLoggedIn, userController.edit);
+app.post('/profile/edit', isLoggedIn, userController.update);
+
 
 app.use(function (err, req, res, next) {
   console.error(err);
