@@ -222,9 +222,6 @@ app.delete('/profile/delete/:field', isLoggedIn, async (req, res) => {
   }
 });
 
-
-
-
 app.use(function (err, req, res, next) {
   console.error(err);
   console.error(err.stack);
