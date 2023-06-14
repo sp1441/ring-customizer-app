@@ -1,16 +1,16 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <% diamonds.forEach((diamond)=> { %>
     <div class="col">
-      <div class="card">
+      <div class="card gem-card">
         <img src="<%= diamond.image %>" class="card-img-top" alt="<%= diamond.name %>">
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="card-title gem-name">
             <%= diamond.name %>
           </h5>
           <form action="/favorites" method="POST">
             <input type="hidden" name="gemId" value="<%= diamond.id %>">
             <input type="hidden" name="gemType" value="diamond">
-            <button type="submit" class="btn btn-primary">Add to Favorites</button>
+            <button type="submit" class="btn btn-primary gem-button">Add to Favorites</button>
           </form>
         </div>
       </div>
