@@ -29,34 +29,22 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
   try {
     const favorite = await db.Favorites.findOne({
       where: { id: req.params.id, userId: req.user.id },
+      include: [
+        { model: db.gemDiamond, as: 'diamond' },
+        { model: db.gemEmerald, as: 'emerald' },
+        { model: db.gemMorganite, as: 'morganite' },
+        { model: db.gemRuby, as: 'ruby' },
+        { model: db.gemSapphire, as: 'sapphire' }
+      ]
     });
 
     if (!favorite) {
       return res.status(403).send('You do not have permission to edit this favorite.');
     }
 
-    res.render('favorites/edit', { favorite });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Something went wrong.');
-  }
-});
+    const gem = favorite.diamond || favorite.emerald || favorite.morganite || favorite.ruby || favorite.sapphire;
 
-// Update a favorite
-router.post('/edit/:id', isLoggedIn, async (req, res) => {
-  try {
-    const favorite = await db.Favorites.findOne({
-      where: { id: req.params.id, userId: req.user.id },
-    });
-
-    if (!favorite) {
-      return res.status(403).send('You do not have permission to edit this favorite.');
-    }
-
-    favorite.name = req.body.name; // Update the name based on the form input
-    await favorite.save();
-
-    res.redirect('/favorites');
+    res.render('favorites/edit', { favorite: { ...favorite.get(), gem } });
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong.');
@@ -139,7 +127,81 @@ router.put('/edit/:id', isLoggedIn, async (req, res) => {
   }
 });
 
+// Get route for displaying form to add comment
+router.get('/add-comment/:id', isLoggedIn, async (req, res) => {
+  try {
+    const favorite = await getFavorite(req.params.id, req.user.id);
+    if (!favorite) {
+      return res.status(403).send('You do not have permission to add a comment to this favorite.');
+    }
+    res.render('favorites/add-comment', { favorite });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
+// Post route for submitting the comment
+router.post('/add-comment/:id', isLoggedIn, async (req, res) => {
+  try {
+    const favorite = await getFavorite(req.params.id, req.user.id);
+    if (!favorite) {
+      return res.status(403).send('You do not have permission to add a comment to this favorite.');
+    }
+    favorite.comment = req.body.comment;
+    await favorite.save();
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
 
 
+// Get route for displaying form to edit comment
+router.get('/edit-comment/:id', isLoggedIn, async (req, res) => {
+  try {
+    const favorite = await getFavorite(req.params.id, req.user.id);
+    if (!favorite || !favorite.comment) {
+      return res.status(403).send('You do not have permission to edit this comment.');
+    }
+    res.render('favorites/edit-comment', { favorite });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
+// Put route for updating the comment
+router.put('/edit-comment/:id', async (req, res) => {
+  try {
+    const favorite = await Favorites.findOne({
+      where: { id: req.params.id, userId: req.user.id },
+    });
+    if (!favorite) return res.status(404).render('404');
+    favorite.comment = req.body.comment;
+    await favorite.save();
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error', { error });
+  }
+});
+
+// Put route for adding a comment
+router.put('/add-comment/:id', async (req, res) => {
+  try {
+    const favorite = await Favorites.findOne({
+      where: { id: req.params.id, userId: req.user.id },
+    });
+    if (!favorite) return res.status(404).render('404');
+    favorite.comment = req.body.comment;
+    await favorite.save();
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error', { error });
+  }
+});
 
 module.exports = router;

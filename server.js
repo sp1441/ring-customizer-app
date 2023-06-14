@@ -103,15 +103,32 @@ app.get('/sapphires', isLoggedIn, async (req, res) => {
 
 app.post('/favorites', isLoggedIn, async (req, res) => {
   try {
-    const gemId = req.body.gemId; // extract gem ID
+    const { gemId, gemType } = req.body;
 
-    // Create new fav entry in the database
+    let gemForeignKey = {};
+    switch (gemType) {
+      case 'diamond':
+        gemForeignKey.diamondId = gemId;
+        break;
+      case 'emerald':
+        gemForeignKey.emeraldId = gemId;
+        break;
+      case 'ruby':
+        gemForeignKey.rubyId = gemId;
+        break;
+      case 'morganite':
+        gemForeignKey.morganiteId = gemId;
+        break;
+      case 'sapphire':
+        gemForeignKey.sapphireId = gemId;
+        break;
+    }
+
     await db.Favorites.create({
       userId: req.user.id,
-      gemId: gemId,
+      ...gemForeignKey,
+      gemType
     });
-
-    // redirect user to the favorites page
     res.redirect('/favorites');
   } catch (error) {
     console.error(error);
@@ -136,7 +153,8 @@ app.use(function (err, req, res, next) {
 
 app.get('/*', (req, res) => {
   res.render('error')
-})
+});
+
 const PORT = process.env.PORT || 4000;
 const server = app.listen(PORT, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${PORT} 🎧`);

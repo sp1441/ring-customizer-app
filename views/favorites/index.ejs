@@ -16,14 +16,19 @@
               <%= favorite.comment ? favorite.comment : 'No comments' %>
             </p>
 
-            <!-- add comment button (links to the Edit page) -->
-            <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Add/Edit Comment</a>
+            <% if (favorite.comment) { %>
+              <!-- edit comment button -->
+              <a href="/favorites/edit-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Edit Comment</a>
+              <% } else { %>
+                <!-- add comment button -->
+                <a href="/favorites/add-comment/<%= favorite.id %>" class="btn btn-primary gem-button">Add Comment</a>
+                <% } %>
 
-            <!-- existing buttons -->
-            <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Edit</a>
-            <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
-              <button type="submit" class="btn btn-danger gem-button">Delete</button>
-            </form>
+                  <!-- existing buttons -->
+                  <a href="/favorites/edit/<%= favorite.id %>" class="btn btn-primary gem-button">Edit</a>
+                  <form action="/favorites/delete/<%= favorite.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger gem-button">Delete</button>
+                  </form>
           </div>
         </div>
       </div>
