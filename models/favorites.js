@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       Favorites.belongsTo(models.gemMorganite, { foreignKey: 'morganiteId', as: 'morganite' });
       Favorites.belongsTo(models.gemRuby, { foreignKey: 'rubyId', as: 'ruby' });
       Favorites.belongsTo(models.gemSapphire, { foreignKey: 'sapphireId', as: 'sapphire' });
-      Favorites.hasMany(models.Comment, { foreignKey: 'favoriteId' });
 
     }
   }
@@ -24,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       morganiteId: DataTypes.INTEGER,
       rubyId: DataTypes.INTEGER,
       sapphireId: DataTypes.INTEGER,
-      gemType: DataTypes.STRING // new field
+      gemType: DataTypes.STRING,
+      comment: DataTypes.STRING // new field
     },
     {
       sequelize,

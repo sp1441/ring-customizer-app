@@ -64,7 +64,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 });
 
 
-// Delete a favorite - reformat so it's a 
+// Delete a favorite gem
 router.delete('/delete/:id', isLoggedIn, async (req, res) => {
   try {
     const favorite = await db.Favorites.findOne({
@@ -117,6 +117,28 @@ router.post('/', isLoggedIn, async (req, res) => {
     res.status(500).send('Something went wrong.');
   }
 });
+
+// Update a favorite
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
+  try {
+    const favorite = await db.Favorites.findOne({
+      where: { id: req.params.id, userId: req.user.id },
+    });
+
+    if (!favorite) {
+      return res.status(403).send('You do not have permission to edit this favorite.');
+    }
+
+    favorite.comment = req.body.comment; // Update the comment based on the form input
+    await favorite.save();
+
+    res.redirect('/favorites');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
 
 
 module.exports = router;
