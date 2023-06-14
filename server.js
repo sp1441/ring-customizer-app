@@ -10,7 +10,6 @@ const db = require('./models');
 const favoritesController = require('./controllers/favoritesController');
 app.use('/favorites', favoritesController);
 
-
 // environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
 // console.log(">>>>>>>>>>", SECRET_SESSION);

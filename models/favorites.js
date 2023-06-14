@@ -1,47 +1,33 @@
 'use strict';
+
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  const Favorites = sequelize.define('Favorites', {
-    userId: DataTypes.INTEGER,
-    diamondId: DataTypes.INTEGER,
-    emeraldId: DataTypes.INTEGER,
-    morganiteId: DataTypes.INTEGER,
-    rubyId: DataTypes.INTEGER,
-    sapphireId: DataTypes.INTEGER
-  }, {});
+  class Favorites extends Model {
+    static associate(models) {
+      Favorites.belongsTo(models.user, { foreignKey: 'userId' });
+      Favorites.belongsTo(models.gemDiamond, { foreignKey: 'diamondId', as: 'diamond' });
+      Favorites.belongsTo(models.gemEmerald, { foreignKey: 'emeraldId', as: 'emerald' });
+      Favorites.belongsTo(models.gemMorganite, { foreignKey: 'morganiteId', as: 'morganite' });
+      Favorites.belongsTo(models.gemRuby, { foreignKey: 'rubyId', as: 'ruby' });
+      Favorites.belongsTo(models.gemSapphire, { foreignKey: 'sapphireId', as: 'sapphire' });
+    }
+  }
 
-  Favorites.associate = function (models) {
-    Favorites.belongsTo(models.user, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-    });
-
-    Favorites.belongsTo(models.gemDiamond, {
-      foreignKey: 'diamondId',
-      constraints: false,
-      as: 'diamond'
-    });
-    Favorites.belongsTo(models.gemEmerald, {
-      foreignKey: 'emeraldId',
-      constraints: false,
-      as: 'emerald'
-    });
-    Favorites.belongsTo(models.gemMorganite, {
-      foreignKey: 'morganiteId',
-      constraints: false,
-      as: 'morganite'
-    });
-    Favorites.belongsTo(models.gemRuby, {
-      foreignKey: 'rubyId',
-      constraints: false,
-      as: 'ruby'
-    });
-    Favorites.belongsTo(models.gemSapphire, {
-      foreignKey: 'sapphireId',
-      constraints: false,
-      as: 'sapphire'
-    });
-
-  };
+  Favorites.init(
+    {
+      userId: DataTypes.INTEGER,
+      diamondId: DataTypes.INTEGER,
+      emeraldId: DataTypes.INTEGER,
+      morganiteId: DataTypes.INTEGER,
+      rubyId: DataTypes.INTEGER,
+      sapphireId: DataTypes.INTEGER
+    },
+    {
+      sequelize,
+      modelName: 'Favorites',
+    }
+  );
 
   return Favorites;
 };
