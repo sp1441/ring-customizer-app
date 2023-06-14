@@ -1,27 +1,22 @@
-# `Express Authentication`
+# `Gem Finder`
+Are you curious about building a ring, either for engagement, a gift, or otherwise? Gem Finder is a great place to start! It allows you to browse numerous gems by gem type, where you can even explore what different cuts of this gem would look like. You can save gems you like to your "favorites," and from there you can edit the gem name, add notes about the gem, and so on. Ultimately, this app allows you to explore many gems with ease as you begin the process of deciding what type of ring you would like. 
 
-Express authentication template using Passport + Flash messages + custom middleware
+Heroku link: link
 
-## What it includes
+## Libraries, Languages, and Frameworks Used:
+-JAVASCRIPT
+-NODE.JS
+-EXPRESS.JS
+-BOOTSTRAP
+-POSTGRESQL
 
-* Sequelize user model / migration
-* Settings for PostgreSQL
-* Passport and passport-local for authentication
-* Sessions to keep user logged in between pages
-* Flash messages for errors and successes
-* Passwords that are hashed with BCrypt
-* EJS Templating and EJS Layouts
-
-### User Model
-
-| Column Name | Data Type | Notes |
-| --------------- | ------------- | ------------------------------ |
-| id | Integer | Serial Primary Key, Auto-generated |
-| name | String | Must be provided |
-| email | String | Must be unique / used for login |
-| password | String | Stored as a hash |
-| createdAt | Date | Auto-generated |
-| updatedAt | Date | Auto-generated |
+### Installation Instructions:
+Please note: it requires Node.js, Postgres, and Sequelize
+1. Fork + Clone this repo to your terminal
+2. Run npm install
+3. Run sequelize db:migrate:all, then sequelize db:seed:all to set up the database
+4. Run npm start to start the server
+5. Open http://localhost:4000 in a web browser to access app.
 
 ### Default Routes
 
