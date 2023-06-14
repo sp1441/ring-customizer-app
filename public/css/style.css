@@ -109,3 +109,11 @@ body {
     position: relative;
     bottom: 10px;
 }
+
+.delete-btn {
+    display: none;
+}
+
+.card-body:hover .delete-btn {
+    display: inline;
+}

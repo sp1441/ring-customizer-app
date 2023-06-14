@@ -16,11 +16,32 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 
 app.set('view engine', 'ejs');
 
+app.use(methodOverride('_method'));
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
-app.use(methodOverride('_method'));
+
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
+
+app.use((req, res, next) => {
+  if (req.body) {
+    for (let key in req.body) {
+      if (typeof req.body[key] === 'string') {
+        req.body[key] = req.body[key].trim();
+      }
+    }
+  }
+
+  next();
+});
+
 
 app.use(flash());            // flash middleware
 
@@ -140,17 +161,26 @@ app.post('/favorites', isLoggedIn, async (req, res) => {
 
 // Add this below /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const user = req.user.get();
-  res.render('profile', { user });
+  const user = req.user;
+
+  user.reload()  // Reload user data from the database
+    .then(user => {
+      res.render('profile', { user: user }); // Pass user data to the view
+    })
+    .catch(err => {
+      console.log(err);
+      res.redirect('/');
+    });
 });
+
 
 
 // routes for editing and updating user profile
 app.get('/profile/edit', isLoggedIn, (req, res) => {
-  res.render('edit', {
-    user: req.user
-  });
+  const user = req.user;
+  res.render('edit', { user: user });
 });
+
 
 app.post('/profile', isLoggedIn, (req, res) => {
   const user = req.user; // Get the current user from the request
@@ -167,6 +197,27 @@ app.post('/profile', isLoggedIn, (req, res) => {
       res.redirect('/profile/edit');
     });
 });
+
+app.delete('/profile/delete/:field', isLoggedIn, async (req, res) => {
+  try {
+    const { field } = req.params;
+    const user = await db.user.findOne({
+      where: {
+        id: req.user.id
+      }
+    });
+
+    // delete the specified field
+    user[field] = null;
+    await user.save();
+
+    res.redirect('/profile');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while deleting user information");
+  }
+});
+
 
 
 app.use(function (err, req, res, next) {
