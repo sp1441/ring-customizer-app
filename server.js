@@ -153,33 +153,19 @@ app.get('/profile/edit', isLoggedIn, (req, res) => {
 });
 
 app.post('/profile', isLoggedIn, (req, res) => {
-  // Extract information from form
-  let aboutMe = req.body.aboutMe;
-  let email = req.body.email;
-  let website = req.body.website;
+  const user = req.user; // Get the current user from the request
 
-  // Find the user and update their information
-  user.findById(req.user.id, function (err, user) {
-    if (err) {
+  user.update({
+    aboutMe: req.body.aboutMe,
+    website: req.body.website
+  })
+    .then(() => {
+      res.redirect('/profile');
+    })
+    .catch(err => {
       console.log(err);
-      return res.redirect('/profile');
-    }
-    if (!user) {
-      return res.redirect('/profile');
-    }
-
-    user.aboutMe = aboutMe;
-    user.email = email;
-    user.website = website;
-
-    user.save(function (err) {
-      if (err) {
-        console.log(err);
-      }
-
-      return res.redirect('/profile');
+      res.redirect('/profile/edit');
     });
-  });
 });
 
 
