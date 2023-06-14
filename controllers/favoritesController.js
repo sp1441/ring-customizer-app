@@ -119,7 +119,7 @@ router.post('/', isLoggedIn, async (req, res) => {
 });
 
 // Update a favorite
-router.post('/edit/:id', isLoggedIn, async (req, res) => {
+router.put('/edit/:id', isLoggedIn, async (req, res) => {
   try {
     const favorite = await db.Favorites.findOne({
       where: { id: req.params.id, userId: req.user.id },
@@ -138,6 +138,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
     res.status(500).send('Something went wrong.');
   }
 });
+
 
 
 
