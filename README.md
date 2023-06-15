@@ -23,7 +23,7 @@ Please note: it requires Node.js, Postgres, and Sequelize
 
 
 ## `1` Wireframe
-
+![alt text](./readme-images/Screen%20Shot%202023-06-14%20at%202.57.59%20PM.png)
 
 ## `2` Navigating the Website
 1. You will first come up on the authorization login page, where you will be asked to either sign up or login 
