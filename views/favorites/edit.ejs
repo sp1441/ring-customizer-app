@@ -1,8 +1,10 @@
-<h2>Edit Gem Name</h2>
-<form action="/favorites/edit/<%= favorite.id %>?_method=PUT" method="POST">
-  <div>
-    <label for="name">Gem Name:</label>
-    <input type="text" id="name" name="name" value="<%= favorite.gem.name %>">
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+  <h2 class="my-4">Edit Gem Name</h2>
+  <form action="/favorites/edit/<%= favorite.id %>?_method=PUT" method="POST">
+    <div class="form-group">
+      <label for="name">Gem Name:</label>
+      <textarea id="name" name="name" class="form-control dynamic-input" rows="1"><%= favorite.gem.name %></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>

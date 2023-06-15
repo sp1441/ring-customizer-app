@@ -1,8 +1,10 @@
-<h2>Add Comment</h2>
-<form action="/favorites/add-comment/<%= favorite.id %>?_method=PUT" method="POST">
-  <div>
-    <label for="comment">Comment:</label>
-    <textarea id="comment" name="comment"></textarea>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+  <h2 class="my-4">Add Comment</h2>
+  <form action="/favorites/add-comment/<%= favorite.id %>?_method=PUT" method="POST">
+    <div class="form-group">
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" class="form-control dynamic-input" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>

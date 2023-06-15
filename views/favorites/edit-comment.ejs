@@ -1,12 +1,15 @@
-<h2>Edit Comment</h2>
-<form action="/favorites/edit-comment/<%= favorite.id %>?_method=PUT" method="POST">
-  <div>
-    <label for="comment">Comment:</label>
-    <textarea id="comment" name="comment"><%= favorite.comment %></textarea>
-  </div>
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+  <h2 class="my-4">Edit Comment</h2>
+  <form action="/favorites/edit-comment/<%= favorite.id %>?_method=PUT" method="POST">
+    <div class="form-group">
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" class="form-control dynamic-input"
+        rows="5"><%= favorite.comment %></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
 
-<form action="/favorites/delete-comment/<%= favorite.id %>?_method=DELETE" method="POST">
-  <button type="submit">Delete Comment</button>
-</form>
+  <form action="/favorites/delete-comment/<%= favorite.id %>?_method=DELETE" method="POST">
+    <button type="submit" class="btn btn-danger mt-3">Delete Comment</button>
+  </form>
+</div>
