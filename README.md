@@ -4,13 +4,13 @@ Are you curious about building a ring, either for engagement, a gift, or otherwi
 Heroku link: link
 
 ## Libraries, Languages, and Frameworks Used:
-->JAVASCRIPT
-->NODE.JS
-->EXPRESS.JS
-->BOOTSTRAP
-->POSTGRESQL
-->CSS
-->HTML5
+JAVASCRIPT
+NODE.JS
+EXPRESS.JS
+BOOTSTRAP
+POSTGRESQL
+CSS
+HTML5
 
 
 ### Installation Instructions:
