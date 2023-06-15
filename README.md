@@ -23,7 +23,38 @@ Please note: it requires Node.js, Postgres, and Sequelize
 
 
 ## `1` Wireframe
+login page:
 ![alt text](./readme-images/Screen%20Shot%202023-06-14%20at%202.57.59%20PM.png)
+
+Sign-in page:
+![alt text](./readme-images/Screen%20Shot%202023-06-14%20at%203.12.47%20PM.png)
+
+Home page:
+![alt text](./readme-images/homepage.png)
+
+Selected gem page:
+![alt text](./readme-images/gempage.png)
+
+User favorites page:
+![alt text](./readme-images/userfavpage.png)
+
+Add a comment on a gem:
+![alt text](./readme-images/comment-on-gem.png)
+
+Display comment on edited gem:
+![alt text](./readme-images/display-commented-gem.png)
+
+Edit gem name:
+![alt text](./readme-images/edit-gem-name.png)
+
+See your profile:
+![alt text](./readme-images/see-profile.png)
+
+Edit your profile:
+![alt text](./readme-images/edit-profile.png)
+
+Delete fields in profile by hovering over them:
+![alt text](./readme-images/delete-fields.png)
 
 ## `2` Navigating the Website
 1. You will first come up on the authorization login page, where you will be asked to either sign up or login 
