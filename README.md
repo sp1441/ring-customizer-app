@@ -1,7 +1,7 @@
 # `Gem Finder`
 Are you curious about building a ring, either for an engagement, a gift, or otherwise? Gem Finder is a great place to start! It allows you to browse numerous gems by gem type, where you can even explore what different cuts of these gems would look like. You can save gems you like to your "favorites," and from there, you can edit the gem name, add notes about the gem, and more. Ultimately, this app allows you to explore many gems with ease as you begin the process of deciding what type of ring you would like.
 
-Heroku link:
+Heroku link: https://gem-finder-e2bbf930d370.herokuapp.com/
 
 ## Libraries, Languages, and Frameworks Used:
 JavaScript
